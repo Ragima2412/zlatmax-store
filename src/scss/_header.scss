@@ -1,0 +1,830 @@
+$mobileSmall: em(479.98px);
+$tablet: em(991.98px);
+
+.top-header {
+    $tablet: em(991.98px);
+    padding: rem(10) 0;
+    background-color: $mainDarkColor;
+    color: #fff;
+
+    &__container {
+        display: flex;
+        align-items: center;
+        gap: rem(20);
+        min-height: rem(50);
+        $tablet: em(991.98px);
+
+        @media (max-width: $tablet) {
+            gap: rem(30);
+            position: fixed;
+            z-index: 5;
+            margin-top: -10px;
+            background-color: $mainDarkColor;
+            width: 100%;
+        }
+    }
+    
+    &__menu {
+        flex: 1 1 auto;
+    }
+
+    &__user {
+        position: relative;
+        z-index: 5;
+        display: inline-flex;
+        align-items: center;
+        font-weight: 600;
+        line-height: math.div(22, 18);
+        gap: em(15, 18);
+
+        &::before {
+            font-size: rem(28);
+        }
+
+        @media (any-hover: hover) {
+            &:hover {
+                span {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        $tablet: em(991.98px);
+
+        @media (max-width: $tablet) {
+            &::before {
+                font-size: rem(35);
+                font-weight: 500;
+            }
+
+            span {
+                display: none;
+            }
+        }
+    }
+
+    //===============================================
+    .menu-top-header {
+        &__list {
+            $tablet: em(991.98px); 
+            display: flex;
+            row-gap: rem(5);
+            @include adaptiveValue("column-gap", 60, 20);
+
+            @media (max-width: $tablet) {
+                flex-direction: column;
+                row-gap: rem(25);
+            }
+        }
+
+        &__item {
+            &_catalog {
+                $tablet: em(991.98px); 
+
+                @media (min-width: $tablet) {
+                    display: none;
+                }
+            }
+        }
+
+        &__link {
+            font-size: rem(16);
+            line-height: math.div(20, 16);
+             cursor: pointer;
+            @media (any-hover: hover) {
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            &_catalog {
+                display: flex;
+                flex-direction: row-reverse;
+                align-items: center;
+                justify-content: space-between;
+
+                &::before {
+                    flex: 0 0 14px;
+                    height: 14px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: rem(8);
+                    transform: translateY(rem(-2))rotate(-90deg);
+                }
+
+            }
+
+            $tablet: em(991.98px);
+
+            @media (max-width: $tablet) {
+                @include adaptiveValue("font-size", 30, 20, 992, 320, 3);
+            }
+        }
+
+        @media (max-width: $tablet) {
+            display: none;
+        }
+    }
+
+    .menu__icon {
+        display: none;
+        margin-right: 20px;
+    }
+
+    $tablet: em(991.98px);
+
+    .menu {
+        &__body {
+            @media (max-width: $tablet) {
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: -100%;
+                overflow: auto;
+                background-color: $mainDarkColor;
+                padding: rem(100) rem(15) rem(50) rem(15);
+                transition: left 0.3s ease 0s;
+                z-index: 4;
+
+                &::before {
+                    content: "";
+                    position: fixed;
+                    width: 100%;
+                    height: 70px;
+                    background-color: $mainDarkColor;
+                    left: -100%;
+                    top: 0;
+                }
+            }
+        }
+
+        ._active {
+            left: 0;
+
+            &::before {
+                left: 0;
+            }
+        }
+
+        @media (max-width: $tablet) {
+            flex: 1 1 auto;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+    }
+
+    $tablet: em(991.98px); 
+
+    @media (max-width: $tablet) {
+        .menu__icon {
+            z-index: 10;
+            display: block;
+            position: relative;
+            width: 40px;
+            height: 22.5px;
+            cursor: pointer;
+            background-color: $mainDarkColor;
+        }
+
+        .menu__icon span,
+        .menu__icon::before,
+        .menu__icon::after {
+            left: 0;
+            position: absolute;
+            height: 10%;
+            width: 100%;
+            transition: all 0.3s ease 0s;
+            background-color: #fff;
+        }
+
+        .menu__icon::before,
+        .menu__icon::after {
+            content: "";
+        }
+
+        .menu__icon::before {
+            top: 0;
+
+        }
+
+        .menu__icon::after {
+            bottom: 0;
+        }
+
+        .menu__icon span {
+            top: 50%;
+            transform: scale(1) translate(0px 50%);
+        }
+
+        .menu__icon._active span {
+            transform: scale(0) translate(0px, -50%);
+        }
+
+        .menu__icon._active::before {
+            top: 50%;
+            transform: rotate(-45deg) translate(0px, -50%);
+        }
+
+        .menu__icon._active::after {
+            bottom: 50%;
+            transform: rotate(45deg) translate(0px, 50%);
+        }
+    }
+}
+
+.body-header {
+    padding: rem(10) 0;
+    background-color: #ECF1F2;
+
+    &__container {
+        display: flex;
+        align-items: center;
+        min-height: rem(50);
+
+        $tablet: em(991.98px);
+
+        @media(max-width: $tablet) {
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+    }
+
+    &__logo {
+        font-size: rem(43, 16);
+        width: rem(190);
+    }
+
+    &__search {
+        flex: 1 1 auto;
+
+        $tablet: em(991.98px);
+
+        @media(min-width: $tablet) {
+            padding-right: rem(20);
+        }
+
+        @media (min-width:$mobileSmall) {
+            @include adaptiveValue ("padding-left", 158, 5, 1);
+        }
+    }
+
+    &__actions {}
+
+}
+
+.search-header {
+    background-color: rgba(7, 7, 7, 0.03);
+    border-radius: rem(3);
+    position: relative;
+    border: 1px solid rgba(4, 4, 4, 0.5);
+    $tablet: em(991.98px); 
+
+    @media(min-width: $tablet) {
+        max-width: rem(377);
+    }
+
+    &__button {
+        position: absolute;
+        background-color: transparent;
+        height: rem(41);
+        width: rem(41);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: rem(8);
+        font-size: rem(14);
+        color: rgba(0, 0, 0, 0.5);
+    }
+
+    &__input {
+        width: 100%;
+        background-color: transparent;
+        border-radius: rem(3);
+        height: rem(41);
+        color: $mainColor;
+        padding: 0px rem(20) 0px rem(43);
+        box-sizing: border-box;
+
+        &::placeholder {
+            color: rgba(0, 0, 0, 0.5);
+        }
+    }
+
+    @media (max-width: $mobileSmall) {
+        background-color: #fff;
+    }
+}
+
+//==========================================================
+.actions-header {
+    display: flex;
+    align-items: center;
+    // @include adaptiveValue ("column-gap", 30,5,1620,1000,1);
+    @include adaptiveValue ("column-gap", 30, 0, 1);
+    $tablet: em(991.98px); //delete after
+
+    @media(max-width: $tablet) {
+        display: none;
+    }
+
+
+    &__location {
+        display: inline-flex;
+        align-items: center;
+        font-weight: 600;
+        @include adaptiveValue("margin-right", 25, 0, 1620, 900, 3);
+
+        &::before {
+            font-size: rem(24);
+            margin: 0px em(10, 24) 0px 0px;
+            
+        }
+
+        @media (any-hover: hover) {
+            &:hover {
+                span {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    &__phones {}
+
+    &__favorite {
+        position: relative;
+        z-index: 5;
+        font-size: rem(27);
+    }
+
+    &__cart {
+        flex: 0 0 auto;
+    }
+}
+
+.phones-header {
+    position: relative;
+    z-index: 5;
+
+    &__items ._active .phones-header__list {
+        display: block;
+    }
+
+    &__items ._active .phones-header__list._spoiller-active {
+        transform: rotate(-180deg);
+    }
+
+    &__item {
+        display: flex;
+        position: relative;
+    }
+
+    &__icon {
+        display: none;
+        $mobileSmall: em(479.98px);
+        @media(max-width: $mobileSmall) {
+            display: block;
+            font-size: rem(32);
+        }
+    }
+
+    &__phone {
+        font-weight: 600;
+        white-space: nowrap;
+        line-height: math.div(22, 18);
+        $tablet: em(991.98px);
+
+        &::before {
+            display: block;
+        }
+
+        @media(max-width: $tablet) {
+            font-size: rem(25);
+        }
+
+        $mobileSmall: em(479.98px);
+
+        @media(max-width: $mobileSmall) {
+            span {
+                display: none;
+            }
+        }
+
+    }
+
+    &__arrow {
+        color: $mainOrange;
+        font-size: rem(10);
+        transition: transform 0.3s ease 0s;
+        margin: 0px 0px 0px em(17, 16);
+        background-color: transparent;
+        cursor: pointer;
+        $tablet: em(991.98px); 
+
+        @media(max-width: $tablet) {
+            display: none;
+        }
+    }
+
+    &__list {
+        display: none;
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        left: 0;
+        margin: rem(5) 0px 0px 0px;
+        border-radius: rem(10);
+        background-color: #fff;
+        padding: rem(15);
+        z-index: 2;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+        li {
+            &:not(:last-child) {
+                margin-bottom: em(8, 18);
+            }
+        }
+
+        $tablet: em(991.98px); 
+        @media(max-width: $tablet) {
+            display: none;
+        }
+    }
+
+    &__callback {
+        margin: rem(3) 0px 0px 0px;
+        font-weight: 700;
+        color: $mainOrange;
+        line-height: math.div(22, 18);
+        background-color: transparent;
+
+        @media (any-hover: hover) {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        $tablet: em(991.98px); 
+        @media(max-width: $tablet) {
+            display: none;
+        }
+    }
+}
+
+.cart-header {
+    display: flex;
+    align-items: center;
+    column-gap: rem(15);
+    position: relative;
+    z-index: 5;
+
+    &__icon {
+        flex: 0 0 37px;
+        font-size: rem(35);
+        position: relative;
+
+        span {
+            position: absolute;
+            width: rem(14);
+            height: rem(14);
+            background-color: $mainOrange;
+            font-size: rem(8);
+            border-radius: 50%;
+            display: flex;
+            top: 0;
+            right: 0;
+            color: #fff;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    &__body {
+        line-height: math.div(20, 16);
+        font-size: rem(16);
+        flex: 0 0 auto;
+
+        @media (max-width: em(1150px)) {
+            display: none;
+        }
+    }
+
+    &__summ {
+        font-weight: 500;
+
+        &:not(:last-child) {
+            margin-bottom: em(5, 16);
+        }
+
+    }
+
+    &__link {
+        color: $mainOrange;
+
+        @media (any-hover: hover) {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+}
+.catalog-header {
+    position: relative;
+    background-color: $mainDarkColor;
+    color: #fff;
+
+    @media(max-width: $mobileSmall) {
+        padding: rem(20) 0;
+    }
+}
+
+
+.menu-catalog {
+
+    @media (max-width: $tablet) {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: $mainDarkColor;
+        padding: rem(25) rem(15) rem(50) rem(15);
+        transition: left 0.3s ease 0s;
+
+        .catalog-open & {
+            left: 0;
+            z-index: 6;
+        }
+    }
+
+    &__list {
+        display: flex;
+        column-gap: rem(10);
+        justify-content: space-between;
+
+        @media (max-width:$tablet) {
+            flex-direction: column;
+            row-gap: rem(25);
+        }
+    }
+
+    &__link {
+        display: flex;
+        position: relative;
+        transition: color 0.3s ease 0s;
+
+        &[data-parent] {
+            &::before {
+                @extend %ic;
+                @extend ._icon-arrow;
+                display: none;
+
+                @media (max-width: $tablet) {
+                    transform: translateY(rem(5)) rotate(-90deg);
+                    display: block;
+                    font-size: rem(10);
+                }
+            }
+
+            @media (max-width: $tablet) {
+                display: flex;
+                width: 100%;
+                flex-direction: row-reverse;
+                justify-content: space-between;
+
+            }
+        }
+
+        @media (min-width:$tablet) {
+            padding: 0px rem(10);
+            min-height: rem(70);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            opacity: 0;
+            visibility: hidden;
+            bottom: 0;
+            left: rem(10);
+            height: 1px;
+            background-color: $mainOrange;
+            width: calc(100% - rem(20));
+            transition: all 0.3s ease 0s;
+        }
+
+        @media (any-hover: hover) {
+           
+            &:hover {
+                color: $mainOrange;
+
+                &::after {
+                    opacity: 1;
+                    visibility: visible;
+                }
+
+                ;
+            }
+        }
+
+        @media (min-width: $tablet) {
+            &._sub-menu-active {
+                color: $mainOrange;
+
+                &::after {
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+        }
+
+
+        @media (max-width:$tablet) {
+            @include adaptiveValue ("font-size", 30, 20, 992, 30, 1);
+
+        }
+    }
+
+    &__sub-menu {
+        width: 100%;
+        left: 0;
+        top: 100%;
+        background-color: $mainDarkColor;
+    }
+
+    &__back {
+        display: none;
+        color: #fff;
+        background-color: $mainDarkColor;
+
+        @media (max-width: $tablet) {
+            display: inline-flex;
+            align-items: center;
+            @include adaptiveValue ("font-size", 30, 20, 992, 320, 1);
+
+            &:not(:last-child) {
+                margin-bottom: em(65px, 30px);
+            }
+
+            &::before {
+                margin: 0px em(13, 30) 0px 0px;
+            }
+        }
+
+    }
+
+    $tablet: em(991.98px); //delete after
+
+}
+
+.sub-menu-catalog {
+
+    @media (max-width: $tablet) {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: $mainDarkColor;
+        padding: rem(25) rem(15) rem(50) rem(15);
+        transition: left 0.3s ease 0s;
+
+        .sub-menu-open & {
+            display: block;
+            left: 0;
+            z-index: 6;
+        }
+    }
+
+    &__back {
+        display: none;
+        color: #fff;
+        background-color: $mainDarkColor;
+
+        @media (max-width: $tablet) {
+            display: inline-flex;
+            align-items: center;
+            @include adaptiveValue ("font-size", 30, 20, 992, 320, 1);
+
+            &:not(:last-child) {
+                margin-bottom: em(65px, 30px);
+            }
+
+            &::before {
+                margin: 0px em(13, 30) 0px 0px;
+            }
+        }
+
+    }
+
+
+    &__block {
+        display: none;
+
+        @for $var from 1 to 6 {
+            &_#{$var} {
+                // justify-content: start;
+                grid-template-columns: repeat($var, minmax(auto, rem(320)));
+            }
+        }
+
+        &._sub-menu-open {
+            display: grid;
+
+            @media (max-width: $tablet) {
+                display: block;
+            }
+        }
+
+    }
+
+
+    &__container {
+        padding: 0px rem(10);
+    }
+
+    &__category {
+        font-size: rem(16);
+        line-height: math.div(20, 16);
+
+        @media (any-hover: hover) {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        @media (min-width: $tablet) {
+            font-weight: 700;
+            padding: rem(30) rem(15) rem(30) 0;
+
+            &:not(:last-child) {
+                margin-bottom: em(25px, 16px);
+            }
+        }
+
+        @media (max-width: $tablet) {
+            &:not(:last-child) {
+                margin-bottom: em(25px, 16px);
+            }
+        }
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: rem(20);
+        padding: rem(30) rem(15) rem(30) 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+        @media (max-width: $tablet) {
+            display: none;
+        }
+    }
+
+    &__item {}
+
+    &__link {
+        font-size: rem(16);
+        line-height: math.div(20, 16);
+
+        @media (any-hover: hover) {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &__link-category {
+        @include adaptiveValue ("font-size", 30, 20, 992, 320, 1);
+    }
+
+    &__footer {
+        padding: rem(30) rem(15) rem(30) 0;
+
+        @media (max-width: $tablet) {
+            display: none;
+        }
+    }
+
+    &__all {
+        font-size: rem(16);
+        color: $mainOrange;
+
+        @media (any-hover: hover) {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

@@ -1,0 +1,772 @@
+@use "sass:math";
+@import "fonts/fonts";
+@import "fonts/icons";
+@import "../scss/base/swiper";
+@import "../scss/base/forms/select";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;0,700;1,500&display=swap');
+@import "null";
+
+$font-family: "Montserrat";
+$font-size: calc(18/16px); 
+
+$mainColor: #000;
+$mainDarkColor: #141414;
+$mainOrange: #e8aa31;
+$mainWhite: #fff;
+
+body {
+    font-weight: 500;
+    font-family: $font-family;
+}
+
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+    $minWidth:320; 
+    $maxWidth:1920;
+    $maxWidthContainer: 1590;
+
+$containerPadding: 30;
+
+// //Тип адаптива
+// //1 = отзывчивость
+// //2 = по брейк-поинтам
+$responsiveType: 1;
+
+// //Ширина срабатывания первого брейкпоинта
+$containerWidth: $maxWidthContainer+$containerPadding;
+
+//Подключение базовых стилей, шаблонов, заготовок и вспомогательных классов
+//Для подкления/отключения конкретных стилей смотри base.scss
+@import "base";
+
+//Break-points
+$pc: em($containerWidth); //ПК, ноутбуки, некоторые планшеты в горизонтальном положении
+$tablet: em(992px); //Планшеты, некоторые телефоны в горизонтальном положении
+$mobile: em(767.98px); //Телефоны L
+$mobileSmall: em(479.98px); //Телефоны S
+
+//Стили для отзывчивых картинок
+
+[class*="-ibg"] {
+    position: relative;
+    
+    img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+    }
+}
+
+[class*="-ibg_contain"] {
+    img {
+        object-fit: contain;
+    }
+}
+
+// //Стили будут применяться ко всем классам содержащим *__container
+@if($responsiveType==1) {
+
+    //Responsive layout
+    [class*="__container"] {
+        @if($maxWidthContainer > 0) {
+            max-width: rem($maxWidthContainer);
+            box-sizing: content-box;
+            margin: 0 auto;
+        }
+        
+        @if($containerPadding > 0) {
+            padding: 0 rem(math.div($containerPadding, 2));
+        }
+    }
+}
+
+@else {
+    
+    //break-points
+    [class*="__container"] {
+        margin: 0 auto;
+        
+        @if($maxWidthContainer>0) {
+            max-width: rem($maxWidthContainer);
+            box-sizing: content-box;
+        }
+        
+        @else {
+            @if($containerPadding>0) {
+                padding: 0 rem(math.div($containerPadding, 2));
+            }
+        }
+
+        @media (max-width: $pc) {
+            max-width: rem(970);
+        }
+
+        @media (max-width: $tablet) {
+            max-width: rem(750);
+        }
+
+        @media (max-width: $mobile) {
+            max-width: none;
+
+            @if($containerPadding>0 and $maxWidthContainer>0) {
+                padding: 0 rem(math.div($containerPadding, 2));
+            }
+        }
+    }
+}
+@import "common";
+@import "header";
+@import "footer";
+@import "catalog";
+@import "../scss/base/forms/range";
+@import "../scss/base/forms/checkbox.scss";
+@import "product";
+@import "../scss/base/forms/quantity.scss";
+
+.page {
+    &__inner {
+     padding-top: rem(30);
+    }
+    &__header {
+        margin-bottom: rem(30);
+    }    
+}
+
+.main-block {
+    
+    background: url('@img/mainpage/main-block/bg.png') center/cover no-repeat;
+    @include adaptiveValue ('padding-top', 40, 40);
+    @include adaptiveValue ('padding-bottom', 60, 40);
+    
+    &__container {}
+
+    &__body {
+        display: grid;
+        align-items: start;
+        row-gap: rem(40);
+
+        &:not(:last-child) {
+            @include adaptiveValue ('margin-bottom', 43, 30, 1);
+        }
+
+        @media (min-width: $tablet) {
+            grid-template-columns: 1fr percent(635, 1600);
+
+        }
+    }
+
+    &__slider {
+        width: 100%;
+        margin: 0px rem(-30);
+        padding: 0px rem(30);
+    }
+
+    &__swiper {
+        &:not(:last-child) {
+            margin-bottom: rem(30);
+        }
+    }
+}
+
+.controll-main-block {
+    display: inline-grid;
+    grid-auto-flow: column;
+    align-items: center;
+    gap: rem(20);
+
+    &__dotts {
+        display: inline-grid;
+        grid-auto-flow: column;
+        gap: rem(15);
+        transform: translate(0px, 10%);
+
+        .swiper-pagination-bullet {
+            cursor: pointer;
+            height: rem(30);
+            width: rem(18);
+            position: relative;
+
+            &::after {
+                content: '';
+                height: rem(2);
+                position: absolute;
+                width: 100%;
+                top: 50%;
+                transform: translate(0px, -50%);
+                background-color: $mainWhite;
+            }
+
+            &::before {
+                content: '';
+                background-color: $mainOrange;
+                height: rem(10);
+                width: rem(10);
+                top: 50%;
+                left: 0;
+                transform: translate(0px, -50%);
+                position: absolute;
+                border-radius: 50%;
+                opacity: 0;
+            }
+        }
+
+        .swiper-pagination-bullet-active {
+            width: rem(30);
+
+            &::after {
+                background-color: $mainOrange;
+            }
+
+            &::before {
+                opacity: 1;
+                left: rem(20);
+                transition: left 3s linear 0s;
+            }
+        }
+    }
+
+    &__fraction {}
+}
+
+.fraction-controll {
+    display: flex;
+    color: $mainWhite;
+    align-items: flex-end;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+
+    &__current {
+        font-size: rem(24);
+        color: $mainOrange;
+    }
+
+    &__all {
+        font-size: rem(18);
+    }
+
+}
+
+.slide-main-block {
+    &__content {
+        letter-spacing: 0.03em;
+        color: #fff;
+
+        @media (min-width: $tablet) {
+            padding: 0px rem(40) 0px 0px;
+        }
+
+        &:not(:last-child) {
+            @include adaptiveValue("margin-bottom", 60, 30);
+        }
+    }
+
+    &__title {
+        font-size: rem(36);
+        letter-spacing: 0.03em;
+        line-height: math.div(46, 36);
+        @include adaptiveValue('font-size', 36, 22, 992, 320, 3);
+
+        &:not(:last-child) {
+            margin-bottom: em(15px, 36px);
+        }
+
+        font-weight: 700;
+
+    }
+
+    &__sub-title {
+        @include adaptiveValue('font-size', 36, 20, 992, 320, 3);
+        font-size: rem(36);
+        line-height: math.div(46, 36);
+
+        &:not(:last-child) {
+            margin-bottom: em(30px, 36px);
+        }
+    }
+
+    &__text {
+        color: rgba(255, 255, 255, 0.7);
+        @include adaptiveValue('font-size', 20, 16, 992, 320, 3);
+        font-size: rem(20);
+        line-height: math.div(30, 20);
+    }
+
+    &__button {
+        @media (max-width: $mobileSmall) {
+            width: 100%;
+        }
+    }
+}
+
+.media-main-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: rem(15);
+
+    &__body {
+        position: relative;
+      
+        img {
+            max-width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+    }
+
+    &__tips {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 5;
+    }
+
+    &__tip {
+        width: rem(20);
+        height: rem(20);
+        position: absolute;
+        cursor: pointer;
+        border-radius: 50%;
+        transition: transform 0.3s ease 0s;
+
+        @media (any-hover: hover) {
+            &:hover {
+                transform: rotate(-180deg);
+            }
+        }
+
+        &::before,
+        &::after {
+            content: '';
+            border-radius: 50%;
+            background-color: $mainOrange;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        &::after {
+            transform: scale(1.6);
+            opacity: 0.5;
+        }
+
+        span {
+            z-index: 2;
+            color: $mainWhite;
+            font-weight: 600;
+            font-size: rem(20);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &_1 {
+            top: percent(186, 500);
+            left: percent(72, 447);
+        }
+
+        &_2 {
+            top: percent(57, 500);
+            right: percent(13, 447);
+        }
+
+        &_3 {
+            bottom: percent(115, 500);
+            right: percent(28, 447);
+        }
+    }
+}
+
+.advantages-main {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: rem(20);
+    justify-content: space-between;
+
+    @media (max-width: $tablet) {
+        row-gap: rem(30);
+        grid-template-columns: repeat(2, 1fr);
+        justify-items: center;
+        padding-bottom: 5px;
+    }
+
+    @media (max-width: $mobile) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    &__item {
+        display: inline-grid;
+        gap: rem(17);
+        text-align: center;
+        max-width: rem(290);
+        grid-template-rows: 77px auto;
+    }
+
+    &__icon {
+        align-self: center;
+    }
+
+    &__text {
+        color: $mainWhite;
+        font-weight: 600;
+        font-size: rem(20);
+        line-height: math.div(32, 20);
+        @media(max-width: $tablet) {
+            padding-bottom: 30px;
+        }
+    }
+}
+
+.catalog-cards {
+    @include adaptiveValue('padding-top', 100, 0, 1);
+    @include adaptiveValue('padding-bottom', 70, 10, 1);
+
+    &__container {
+        display: grid;
+        gap: rem(30);
+
+        @media(min-width: $mobileSmall) {
+            grid-template-columns: repeat(auto-fit, minmax(rem(400), 1fr));
+
+        }
+    }
+
+    &__item {}
+}
+
+.item-catalog-cards {
+    overflow: hidden;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+    min-height: rem(290);
+    transition: box-shadow 0.3s ease 0s;
+
+    @media (any-hover : hover) {
+        &:hover {
+            box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.25);
+        }
+    }
+
+    &__body {
+        position: relative;
+        z-index: 2;
+        @include adaptiveValue('padding', 30, 2);
+    }
+
+    &__title {
+        &:not(:last-child) {
+            margin-bottom: em(30px, 24px);
+        }
+    }
+
+    &__link-title {
+        font-weight: 600;
+        font-size: rem(24);
+        line-height: math.div(34, 24);
+        display: inline-block;
+
+        &::after {
+            content: '';
+            width: rem(70);
+            height: rem(2);
+            display: block;
+            margin: rem(15) 0px 0px 0px;
+            background-color: $mainOrange;
+            transition: width 0.8s ease 0s;
+        }
+
+        @media (any-hover: hover) {
+            &:hover {
+                &::after {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    &__item {
+        position: relative;
+        padding: 0px 0px 0px rem(20);
+
+        &::before {
+            content: "";
+            width: rem(6);
+            height: rem(6);
+            background-color: $mainOrange;
+            border-radius: 50%;
+            position: absolute;
+            top: em(8px, 18px);
+            left: 0;
+        }
+
+        &:not(:last-child) {
+            margin-bottom: rem(10);
+        }
+    }
+
+    &__link {
+        font-size: rem(18);
+        line-height: math.div(24, 18);
+        transition: text-decoration 0.8s ease 0s;
+
+        @media (any-hover: hover) {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &__image {
+
+        width: 100%;
+        text-align: right;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        transform: translate(0px, 8%);
+
+        img {
+            max-width: 100%
+        }
+
+        @media(min-width: $mobileSmall) {
+            position: absolute;
+            height: 100%;
+            top: 0;
+            right: 0;
+        }
+
+    }
+
+}
+
+.hits-products {
+    @include adaptiveValue('padding-top', 50, 40, 1);
+    @include adaptiveValue('padding-bottom', 120, 40, 1);
+}
+
+.products-new {
+    background: url("@img/new-products/bg-main.jpg") bottom/cover no-repeat;
+}
+.sale-products {
+    @include adaptiveValue('padding-top', 120, 40, 1);
+    @include adaptiveValue('padding-bottom', 120, 40, 1);
+
+    &_no-bottom {
+        padding-bottom: 0;
+    }
+}
+
+.new-products_no-top {
+    padding-top: 0;
+}
+
+.articles-module {
+    @include adaptiveValue("margin-bottom", 120, 40, 1);
+
+    &__container {}
+
+    &__title {
+        letter-spacing: 0.05em;
+        font-size: rem(30);
+        font-weight: 700;
+        line-height: math.div(46, 30);
+
+        &:not(:last-child) {
+            margin-bottom: em(30, 30);
+        }
+    }
+
+    &__items {
+        display: grid;
+        gap: rem(30);
+        grid-template-columns: repeat(auto-fit, minmax(rem(290), 1fr));
+    }
+
+    &__item {}
+}
+
+.item-article {
+    background-color: $mainWhite;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: box-shadow 0.3s ease 0s;
+
+    @media(any-hover:hover) {
+        &:hover {
+            box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    &__body {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        @include adaptiveValue ("padding", 25, 15, 1);
+    }
+
+    &__image-ibg {
+        padding-bottom: percent(200, 376);
+    }
+
+    &__title {
+        flex: 1 1 auto;
+
+        &:not(:last-child) {
+            margin-bottom: em(16, 20);
+        }
+    }
+
+    &__link-title {
+        font-weight: 600;
+        font-size: rem(20);
+        line-height: math.div(34, 20);
+
+        @media (any-hover:hover) {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &__date {
+        color: #ABABAB;
+        font-size: rem(16);
+        line-height: math.div(24, 16);
+
+    }
+
+} 
+
+.products-block {
+    @include adaptiveValue("margin-bottom", 120, 40, 1);
+
+    &__container {
+        display: grid;
+        gap: rem(30);
+
+        @media(min-width: $mobileSmall) {
+            grid-template-columns: repeat(auto-fit, minmax(rem(600), 1fr));
+
+        }
+    }
+}
+
+.product-block {
+    overflow: hidden;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+    min-height: rem(290);
+    transition: box-shadow 0.3s ease 0s;
+
+    @media (any-hover : hover) {
+        &:hover {
+            box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.25);
+        }
+    }
+
+    &__body {
+        position: relative;
+        z-index: 2;
+        @include adaptiveValue('padding', 30, 20);
+    }
+
+    &__title {
+        &:not(:last-child) {
+            margin-bottom: em(30px, 24px);
+        }
+    }
+
+    &__text {
+        font-size: rem(18);
+        line-height: math.div(27, 18);
+
+        &:not(:last-child) {
+            margin-bottom: em(46, 18);
+        }
+
+        @media(min-width: em(710px)) {
+            max-width: rem(265);
+
+        }
+    }
+
+    &__link-title {
+        font-weight: 600;
+        font-size: rem(24);
+        line-height: math.div(34, 24);
+        display: inline-block;
+
+        &::after {
+            content: '';
+            width: rem(70);
+            height: rem(2);
+            display: block;
+            margin: rem(15) 0px 0px 0px;
+            background-color: $mainOrange;
+            transition: width 0.8s ease 0s;
+        }
+
+        @media (any-hover: hover) {
+            &:hover {
+                &::after {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    &__image {
+        width: 100%;
+        text-align: right;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        transform: translate(0px, 8%);
+
+        img {
+            max-width: 100%
+        }
+
+        @media(min-width: em(710px)) {
+            position: absolute;
+            height: 100%;
+            top: 0;
+            right: 0;
+        }
+
+    }
+
+    &__button {
+        @media(min-width: em(710px)) {
+            max-width: rem(265);
+        }
+    }
+}
+
+.text-footer{
+    background: url('@img/footer/bg.jpg') top / cover no-repeat;
+}
+
+.actions-product {
+ &__price {
+     background: url("@img/product/rub.svg") right no-repeat;
+ }  
+}

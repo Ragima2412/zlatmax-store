@@ -1,0 +1,164 @@
+// .select {
+//     position:relative;
+//     &__body {
+//         position: relative
+//     }
+//     &__title {
+//         color: inherit;
+//         text-align: left;
+//         border: 1px solid #d9d9d9;
+//         background-color: white;
+//         cursor: pointer;
+//         width: 100%;
+//         border-radius: 4px;
+//     }
+//     &__value {
+//         display: flex;
+//         align-items: center;
+//         height: 30px;
+//         padding: 0px 15px;
+//         justify-content: space-between;
+//         flex-direction: row-reverse;
+//         &:before {
+//           content: "";
+//           align-self: stretch;
+//           flex: 0 0 10px;
+//           transition: all 0.3s ease 0s;
+//           display: flex;
+//           justify-content: center;
+//           align-items: center;
+//           ._select-open & {
+//               transform: rotate(-180deg);
+//           }
+
+//         }
+//     }
+//     &__text {
+//         flex: 0 0 auto;
+//     }
+//     &__input {
+//         width: 100%;
+//         background-color: transparent;
+//         height: 100%;
+//     }
+//     &__options {
+//         color:black;
+//         position: absolute;
+//         top: 29px;
+//         border-radius: 0 0 4px 4px;
+//         min-width: 100%;
+//         left: 0;
+//         background-color: #fff;
+//         border-top: 0;
+//         bottom: 1px solid #d9d9d9;
+//         border-top: 0;
+//         padding: 10px 0px 5px 0px;
+//     }
+//     &__scroll {
+//         overflow-y: hidden;
+//         overflow-x: hidden;
+
+//         min-height: 200px;
+//         .simplebar-scrollbar {
+//             &::before {
+
+//             }
+//         }
+//     }
+//     &__option {
+//         width: 100%;
+//         display: block;
+//         text-align: left;
+//         cursor: pointer;
+//         padding: 5px 15px;
+//         color:inherit;
+//         &._select-selected {
+//             background-color: wheat;
+//         }
+//         @media (any-hover:hover) {
+//             background-color: #d9d9d9;
+//         }
+//     }
+//     &__row {
+//         display: inline-flex;
+//         align-items: center;
+//     }
+//     &__select-open {
+//         z-index: 5;
+//     }
+//     &__control {
+//         .select__title {
+//             border: 1px solid rgba(4,4,4,0.3);
+//             box-sizing: border-box;
+//             border-radius: 3px;
+//             .select__value {
+//                 &::before {
+//                     @extend %ic;
+//                     content: "\e90e";
+//                 }
+//             }
+//         }
+//     }
+// }
+// .select {
+//     position: realtive;
+//     margin-bottom: 1rem;
+// }
+// .select:after {
+//     content: "\e90e";
+//     display: block;
+//     border-style: solid;
+//     border-width: 6px 5px 0 5px;
+//     border-color: #007bff transparent transparent transparent;
+//     position: absolute;
+//     top: 50%;
+// z-index: 1;
+//     right: 1rem;
+// }
+// .select select {
+//     display: block;
+//     width: 100%;
+//     padding: 0.75rem 1rem;
+//     border: 1px solid rgb(126, 3, 3);
+//     background: none;
+//     border: 0;
+//     -webkit-appearance:none;
+//     appearance: none;
+//     font-family: inherit;
+//     font-size: 1rem;
+//     color: green;
+// }
+
+// .select  {
+//     position: relative;
+//     margin-bottom: 1rem;
+// }
+
+.select {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: #E5E5E5;
+    border: 1px solid rgba(4, 4, 4, 0.302);
+    border-radius: 3px;
+    height: rem(40);
+    -webkit-appearance:none;
+    appearance: none;
+    font-family: inherit;
+    font-size: rem(16);
+    color: rgba(0, 0, 0, 0.5);   
+}
+.select:after {     
+      
+        content: "";
+         display: block;        
+         border-style: solid;
+         border-width: 6px 5px 0 5px;
+         border-color: #00ff2a transparent transparent transparent;
+         position: absolute;
+         top: 50%;
+        z-index: 1;
+         right: 1rem;
+      
+     }
+  
